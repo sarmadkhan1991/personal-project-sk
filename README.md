@@ -81,7 +81,9 @@
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
     email VARCHAR(80) NOT NULL,
-    hash TEXT NOT NULL
+    hash TEXT NOT NULL,
+    first_name VARCHAR(40) NOT NULL,
+    last_name VARCHAR(40) NOT NULL
 )
 ```
 
