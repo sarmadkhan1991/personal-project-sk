@@ -13,6 +13,6 @@ export default (
         <Route component={About} path='/about'/>
         <Route component={Contact} path='/contact'/>
         <Route component={Login} path='/login'/>
-        <Route component={Shop} path='Shop'/>
+        <Route component={Shop} path='/shop'/>
     </Switch>
 )

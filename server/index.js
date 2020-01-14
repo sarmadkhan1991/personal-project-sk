@@ -22,11 +22,11 @@ app.use(session({
     }
 }));
 
-app.post('/auth/register', ac.register);
+app.post('/api/register', ac.register);
 
-app.post('/auth/login', ac.login);
+app.post('/api/login', ac.login);
 
-app.get('/auth/logout', ac.logout);
+app.get('/api/logout', ac.logout);
 
 
 

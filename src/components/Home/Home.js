@@ -1,9 +1,11 @@
 import React from 'react';
+import Background from '../../images/Background.jpg';
+
 
 function Home () {
     return (
         <div>
-            Home
+            <img src={Background} alt='background'/> 
         </div>
     )
 }
