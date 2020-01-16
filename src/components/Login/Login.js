@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { requestUserData } from '../../redux/userReducer';
 
 class Login extends React.Component {
     constructor (props) {
@@ -12,6 +14,7 @@ class Login extends React.Component {
             lastName:''
         }
         this.login = this.login.bind(this);
+        this.logout = this.logout.bind(this);
     }
 
     changeHandlerEmail (val) {
@@ -29,25 +32,44 @@ class Login extends React.Component {
     login () {
         const {email, password} = this.state;
         axios.post('/api/login', {email, password}).then(res => {
-            console.log(res.data)
-            const { firstName, lastName } = res.data;
-            this.setState({
-                firstName: firstName,
-                lastName: lastName
-            })
+            //const { firstName, lastName } = res.data;
+            this.props.requestUserData();
+            // this.setState({
+            //     firstName: firstName,
+            //     lastName: lastName
+            // })
         })
+        //this.props.history.push('/shop');
+    }
+
+    logout () {
+        axios.get('/api/logout').then(res => {
+            // this.setState({
+            //     email: '',
+            //     password: '',
+            //     firstName:'',
+            //     lastName:''
+            // })
+        })
+        this.props.requestUserData()
     }
 
     render() {
-        console.log(this.state);
         return (
             <div className='login-container'>
                 <input type='email' name='email' onChange={(e) => this.changeHandlerEmail( e.target.value)}/>
                 <input type='password' name='password'onChange={(e) => this.changeHandlerPassword(e.target.value)}/>
                 <button onClick={this.login}>Submit</button>
+                {/* <button onClick={this.logout}>logout</button> */}
             </div>
         )
     }
 }
 
-export default Login;
+function mapStateToProps (reduxState) {
+    return {
+        user: reduxState
+    }
+}
+
+export default connect(mapStateToProps, {requestUserData}) (Login);

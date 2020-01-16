@@ -3,6 +3,8 @@ const massive = require('massive');
 const express = require('express');
 const session = require('express-session');
 const ac = require('./Controller/authCtrl');
+const pc = require('./Controller/productCtrl');
+const cc = require('./Controller/cartCtrl');
 const app = express();
 app.use(express.json());
 
@@ -27,6 +29,12 @@ app.post('/api/register', ac.register);
 app.post('/api/login', ac.login);
 
 app.get('/api/logout', ac.logout);
+
+app.get('/api/user', ac.userData);
+
+app.get('/api/products', pc.getAll);
+
+app.post('/api/cart/:id', cc.add);
 
 
 

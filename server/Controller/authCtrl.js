@@ -38,7 +38,9 @@ module.exports = {
                     id: user.user_id,
                     email: user.email,
                     firstName: user.first_name,
-                    lastName: user.last_name
+                    lastName: user.last_name,
+                    cart: [],
+                    total: 0
                 }
                 res.status(200).send(req.session.user);
             }
@@ -47,5 +49,13 @@ module.exports = {
     logout: async (req, res, next) => {
         req.session.destroy();
         res.sendStatus(200);
+    },
+    userData: (req, res) => {
+        const { user } = req.session;
+        if (user) {
+            res.status(200).send(user);
+        } else {
+            res.sendStatus(401);
+        }
     }
 }
