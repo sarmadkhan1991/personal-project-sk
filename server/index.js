@@ -24,6 +24,8 @@ app.use(session({
     }
 }));
 
+app.use(express.static(`${__dirname}/../build`))
+
 app.post('/api/register', ac.register);
 
 app.post('/api/login', ac.login);

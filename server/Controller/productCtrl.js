@@ -4,7 +4,8 @@ module.exports = {
         const db = req.app.get('db');
         const products = await db.get_all_products();
         if (products) {
-            res.status(200).send(products)
+            const productsArr = products.map(product => ({...product, quantity: 0}))
+            res.status(200).send(productsArr);
         }
     }
 }
