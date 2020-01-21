@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import './Login.css';
 import { connect } from 'react-redux';
 import { requestUserData } from '../../redux/userReducer';
 
@@ -14,7 +15,6 @@ class Login extends React.Component {
             lastName:''
         }
         this.login = this.login.bind(this);
-        this.logout = this.logout.bind(this);
     }
 
     changeHandlerEmail (val) {
@@ -32,35 +32,18 @@ class Login extends React.Component {
     login () {
         const {email, password} = this.state;
         axios.post('/api/login', {email, password}).then(res => {
-            //const { firstName, lastName } = res.data;
             this.props.requestUserData();
-            // this.setState({
-            //     firstName: firstName,
-            //     lastName: lastName
-            // })
         })
-        //this.props.history.push('/shop');
-    }
-
-    logout () {
-        axios.get('/api/logout').then(res => {
-            // this.setState({
-            //     email: '',
-            //     password: '',
-            //     firstName:'',
-            //     lastName:''
-            // })
-        })
-        this.props.requestUserData()
+        this.props.history.push('/shop');
     }
 
     render() {
         return (
             <div className='login-container'>
-                <input type='email' name='email' onChange={(e) => this.changeHandlerEmail( e.target.value)}/>
-                <input type='password' name='password'onChange={(e) => this.changeHandlerPassword(e.target.value)}/>
+                Login:
+                <input type='email' name='email' onChange={(e) => this.changeHandlerEmail( e.target.value)} placeholder='email'/>
+                <input type='password' name='password'onChange={(e) => this.changeHandlerPassword(e.target.value)} placeholder='password'/>
                 <button onClick={this.login}>Submit</button>
-                {/* <button onClick={this.logout}>logout</button> */}
             </div>
         )
     }

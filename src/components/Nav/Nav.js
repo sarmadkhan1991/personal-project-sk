@@ -17,6 +17,9 @@ function Nav (props) {
             <Link to='/contact'>
                 <div>Contact</div>
             </Link>
+            <Link to='/shop'>
+                <div>Shop</div>
+            </Link>
             <Link to='/login'>
                 <div>Login</div>
             </Link>
@@ -36,6 +39,12 @@ function Nav (props) {
             </Link>
             <Link to='/shop'>
                 <div>Shop</div>
+            </Link>
+            <Link to='/cart'>
+                <div>Cart</div>
+            </Link>
+            <Link to='/profile'>
+                <div>profile</div>
             </Link>
             <Logout />
         </div>

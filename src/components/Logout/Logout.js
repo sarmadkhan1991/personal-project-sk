@@ -5,8 +5,8 @@ import { requestUserData } from '../../redux/userReducer';
 
 class Logout extends React.Component {
 
-    async logout () {
-        await axios.get('/api/logout');
+    logout () {
+        axios.delete('/api/logout');
         this.props.requestUserData();
     }
 
@@ -19,4 +19,10 @@ class Logout extends React.Component {
     }
 }
 
-export default connect(null, {requestUserData}) (Logout);
+function mapStateToProps(reduxState) {
+    return {
+        user: reduxState.user
+    }
+}
+
+export default connect(mapStateToProps, {requestUserData}) (Logout);

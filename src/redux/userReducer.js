@@ -51,7 +51,6 @@ export default function reducer (state = initialState, action) {
             };
         case UPDATE_USER_DATA:
             {
-                console.log(action.payload);
                 const {id, email, firstName, lastName, cart, total} = action.payload;
                 return {
                     id: id,

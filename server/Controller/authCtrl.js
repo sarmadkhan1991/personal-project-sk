@@ -50,12 +50,29 @@ module.exports = {
         req.session.destroy();
         res.sendStatus(200);
     },
+    updateUser: async (req, res, next) => {
+        const {id, firstName, lastName, email, password, cart, total} = req.body;
+        const db = req.app.get('db');
+        const salt = await bcrypt.genSalt(12);
+        const hash = await bcrypt.hashSync(password, salt);
+        const updatedUser = await db.update_user([id, email, hash, firstName, lastName]);
+        const user = updatedUser[0];
+        req.session.user = {
+            id: id,
+            email: user.email,
+            firstName: user.first_name,
+            lastName: user.last_name,
+            cart: cart,
+            total: total
+        }
+        res.status(200).send(req.session.user);
+    },
     userData: (req, res) => {
         const { user } = req.session;
         if (user) {
             res.status(200).send(user);
         } else {
-            res.sendStatus(401);
+            res.status(401).send('Please Login!');
         }
     }
 }

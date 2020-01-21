@@ -1,6 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import axios from 'axios';
+import { connect } from 'react-redux';
 import {requestUserData, updateUserData} from '../../redux/userReducer';
 
 class Shop extends React.Component {
@@ -21,39 +21,24 @@ class Shop extends React.Component {
     }
 
     addToCart (product) {
-        console.log(product);
-        console.log(this.props.user);
+        const id = product.product_id
         const {cart} = this.props.user;
-        if (cart.length > 0){
-            for (let i = 0; i < cart.length; i++){
-                if (cart[i].product_id === product.product_id){
-                    cart[i].quantity++;
-                    this.props.user.total += cart[i].price;
-                    this.props.updateUserData(this.props.user);
-                    console.log("trig2");
-                } else {
-                    product.quantity++;
-                    this.props.user.total += product.price;
-                    cart.push(product);
-                    this.props.updateUserData(this.props.user);
-                    console.log("trig3");
-                }
-            }
-        } else {
+        const index = cart.findIndex(elem => elem.product_id === id);
+        if(index === -1){
             product.quantity++;
             this.props.user.total += product.price;
             cart.push(product);
             this.props.updateUserData(this.props.user);
-            console.log("trig1");
+        } else {
+            cart[index].quantity++;
+            this.props.user.total += cart[index].price;
+            this.props.updateUserData(this.props.user);
         }
-        //this.props.updateUserData(user.data);
     }
 
     render () {
 
         const { products } = this.state;
-        console.log(products);
-        //console.log(this.props.user);
         const mappedProducts = products.map(product => {
             const productCopy = {...product};
             return (
