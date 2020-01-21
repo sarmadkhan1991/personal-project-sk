@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import {requestUserData, updateUserData} from '../../redux/userReducer';
+import './Shop.css'
 
 class Shop extends React.Component {
     constructor () {
@@ -42,8 +43,8 @@ class Shop extends React.Component {
         const mappedProducts = products.map(product => {
             const productCopy = {...product};
             return (
-                <div key={productCopy.product_id}>
-                    <img src={productCopy.img_url} alt={product.name}/>
+                <div key={productCopy.product_id} className='product-container'>
+                    <img src={productCopy.img_url} alt={product.name} className='product-img'/>
                     <div>{productCopy.name}</div>
                     <div>${productCopy.price}</div>
                     <button onClick={() => this.addToCart(productCopy)}>add</button>
@@ -54,11 +55,9 @@ class Shop extends React.Component {
             return <h1>Login To Shop Please!</h1>
         }
         return (
-            <div>
-                <h1>
-                Shop
-                </h1>
-                <div>
+            <div className='main-container'>
+                <h1>Shop!</h1>
+                <div className='Products-container'>
                     {mappedProducts}
                 </div>
             </div>

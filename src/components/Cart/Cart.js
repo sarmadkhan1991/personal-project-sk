@@ -26,27 +26,31 @@ class Cart extends React.Component {
 
 
     render () {
-        const {cart} = this.props.user
-        const mappedCart = cart.map(product => {
-            const productCopy = {...product}
+        if (!this.props.user.id){
+            return <div>Login to view cart!</div>
+        } else {
+            const {cart} = this.props.user
+            const mappedCart = cart.map(product => {
+                const productCopy = {...product}
+                return (
+                    <div key={productCopy.product_id}>
+                        <img src={productCopy.img_url} alt={productCopy.name} />
+                        <div>{productCopy.name}</div>
+                        <div>Price: ${productCopy.price}</div>
+                        <div>Quantity: {productCopy.quantity}</div>
+                        <div>Total: ${productCopy.price * productCopy.quantity}</div>
+                        <button onClick={() => this.removeFromCart(productCopy)}>Remove</button>
+                    </div>
+                )
+            })
             return (
-                <div key={productCopy.product_id}>
-                    <img src={productCopy.img_url} alt={productCopy.name} />
-                    <div>{productCopy.name}</div>
-                    <div>Price: ${productCopy.price}</div>
-                    <div>Quantity: {productCopy.quantity}</div>
-                    <div>Total: ${productCopy.price * productCopy.quantity}</div>
-                    <button onClick={() => this.removeFromCart(productCopy)}>Remove</button>
+                <div>
+                    Cart:
+                    <div>{mappedCart}</div>
+                    <button onClick={() => this.checkout()}>Checkout</button>
                 </div>
             )
-        })
-        return (
-            <div>
-                Cart:
-                <div>{mappedCart}</div>
-                <button onClick={() => this.checkout()}>Checkout</button>
-            </div>
-        )
+        }
     }
 }
 

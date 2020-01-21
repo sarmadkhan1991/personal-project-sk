@@ -1,0 +1,14 @@
+.icon-img {
+    height: 50px;
+    width: 50px;
+    padding: 10px;
+}
+
+.social-media-links {
+    height: 80px;
+    width: 300px;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}

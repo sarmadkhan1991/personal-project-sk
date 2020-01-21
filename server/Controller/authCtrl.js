@@ -11,15 +11,8 @@ module.exports = {
         } else {
             const salt = await bcrypt.genSalt(12);
             const hash = await bcrypt.hashSync(password, salt);
-            const registeredUser = await db.register_user([email, hash, firstName, lastName]);
-            const user = registeredUser[0];
-            req.session.user = {
-                id: user.user_id,
-                email: user.email,
-                firstName: user.first_name,
-                lastName: user.last_name
-            };
-            res.status(200).send(req.session.user);
+            await db.register_user([email, hash, firstName, lastName]);
+            res.sendStatus(200)
         }
     },
     login: async (req, res, next) => {

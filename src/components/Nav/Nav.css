@@ -7,3 +7,9 @@
     color: white;
     background-color: black;
 }
+
+.header-img {
+    border: 2px solid white;
+    height: 35px;
+    width: 90px;
+}
