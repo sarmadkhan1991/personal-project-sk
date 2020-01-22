@@ -56,7 +56,6 @@ class Shop extends React.Component {
         }
         return (
             <div className='main-container'>
-                <h1>Shop!</h1>
                 <div className='Products-container'>
                     {mappedProducts}
                 </div>

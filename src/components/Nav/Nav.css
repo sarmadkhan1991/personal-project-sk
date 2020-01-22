@@ -8,8 +8,18 @@
     background-color: black;
 }
 
+.links {
+    height: 35px;
+}
+
 .header-img {
     border: 2px solid white;
-    height: 35px;
+    height: 100%;
     width: 90px;
 }
+
+.header-img:hover {
+    height: 40px;
+    width: 95px;
+}
+

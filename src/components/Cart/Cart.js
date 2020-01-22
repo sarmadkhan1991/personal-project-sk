@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {updateUserData} from '../../redux/userReducer';
+import './Cart.css';
 
 class Cart extends React.Component {
 
@@ -10,6 +11,7 @@ class Cart extends React.Component {
         const index = cart.findIndex(elem => elem.product_id === id);
         cart[index].quantity--;
         if (cart[index].quantity === 0){
+            this.props.user.total -= cart[index].price;
             cart.splice(index, 1);
             this.props.updateUserData(this.props.user);
         } else {
@@ -33,8 +35,8 @@ class Cart extends React.Component {
             const mappedCart = cart.map(product => {
                 const productCopy = {...product}
                 return (
-                    <div key={productCopy.product_id}>
-                        <img src={productCopy.img_url} alt={productCopy.name} />
+                    <div key={productCopy.product_id} className='product-container'>
+                        <img src={productCopy.img_url} alt={productCopy.name} className='product-img'/>
                         <div>{productCopy.name}</div>
                         <div>Price: ${productCopy.price}</div>
                         <div>Quantity: {productCopy.quantity}</div>
@@ -45,8 +47,8 @@ class Cart extends React.Component {
             })
             return (
                 <div>
-                    Cart:
-                    <div>{mappedCart}</div>
+                    Total: ${this.props.user.total}
+                    <div className='Products-container'>{mappedCart}</div>
                     <button onClick={() => this.checkout()}>Checkout</button>
                 </div>
             )

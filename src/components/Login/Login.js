@@ -3,6 +3,8 @@ import axios from 'axios';
 import './Login.css';
 import { connect } from 'react-redux';
 import { requestUserData } from '../../redux/userReducer';
+import login from '../../images/Logininverted.png';
+import register from '../../images/Registerinverted.png';
 
 class Login extends React.Component {
     constructor (props) {
@@ -25,18 +27,19 @@ class Login extends React.Component {
         })
     }
 
-    login () {
+    async login () {
         const {email, password} = this.state;
-        axios.post('/api/login', {email, password}).then(res => {
+        await axios.post('/api/login', {email, password}).then(() => {
             this.props.requestUserData();
+            this.props.history.push('/shop');
         })
-        this.props.history.push('/shop');
     }
 
     async register () {
         const {email, password, firstName, lastName} = this.state;
-        await axios.post('/api/register', {email, password, firstName, lastName});
-        this.setState({registering: false})
+        await axios.post('/api/register', {email, password, firstName, lastName}).then(() => {
+            this.setState({registering: false})
+        });
     }
 
     render() {
@@ -44,24 +47,20 @@ class Login extends React.Component {
         if (registering === true) {
             return (
                 <div className='login-container'>
-                    Register:
-                    <input type='email' name='email' onChange={(e) => this.changeHandler(e.target.name, e.target.value)} placeholder='email' required/>
-                    <input type='password' name='password' onChange={(e) => this.changeHandler(e.target.name, e.target.value)} placeholder='password' required/>
-                    <input type='text' name='firstName' onChange={(e) => this.changeHandler(e.target.name, e.target.value)} placeholder='First Name' required/>
-                    <input type='text' name='lastName' onChange={(e) => this.changeHandler(e.target.name, e.target.value)} placeholder='Last Name' required/>
-                    <button onClick={this.register}>Submit</button>
+                    <input type='email' name='email' onChange={(e) => this.changeHandler(e.target.name, e.target.value)} placeholder='email' required className='input'/>
+                    <input type='password' name='password' onChange={(e) => this.changeHandler(e.target.name, e.target.value)} placeholder='password' required className='input'/>
+                    <input type='text' name='firstName' onChange={(e) => this.changeHandler(e.target.name, e.target.value)} placeholder='First Name' required className='input'/>
+                    <input type='text' name='lastName' onChange={(e) => this.changeHandler(e.target.name, e.target.value)} placeholder='Last Name' required className='input'/>
+                    <img src={register} onClick={() => this.register()}  className='buttons' id='register'/>
                 </div>
             )
         }
         return (
-            <div className='login-container'>
-                
-                    Login:
-                    <input type='email' name='email' onChange={(e) => this.changeHandler(e.target.name, e.target.value)} placeholder='email'/>
-                    <input type='password' name='password' onChange={(e) => this.changeHandler(e.target.name, e.target.value)} placeholder='password'/>
-                    <button onClick={this.login}>Submit</button>
-                    Register:
-                    <button onClick={() => this.setState({registering: true})}>Register</button>
+            <div className='login-container'> 
+                    <input type='email' name='email' onChange={(e) => this.changeHandler(e.target.name, e.target.value)} placeholder='email' className='input'/>
+                    <input type='password' name='password' onChange={(e) => this.changeHandler(e.target.name, e.target.value)} placeholder='password' className='input'/>
+                    <img src={login} alt='login-button' className='buttons' onClick={this.login}/>
+                    <img src={register} alt='register-button' className='buttons' onClick={() => this.setState({registering: true})} id='register'/>
                 
             </div>
         )

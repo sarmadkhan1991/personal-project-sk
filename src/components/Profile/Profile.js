@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import {updateUserData} from '../../redux/userReducer';
+import edit from '../../images/Edit.png';
 
 class Profile extends React.Component {
     constructor (props) {
@@ -62,6 +63,7 @@ class Profile extends React.Component {
         const {firstName, lastName, email} = this.props.user;
         if (this.state.editing === true){
             return (
+                <div className='main-container'>
                 <form onSubmit={this.submitForm} className='main-container'>
                     First Name:
                     <input 
@@ -96,17 +98,20 @@ class Profile extends React.Component {
                     required/>
                     <button type='submit' onClick={() => this.updateUserInfo()}>Submit</button>
                 </form>
+                </div>
             )
         } else if (this.state.editing === false && !this.props.user.id){
             return <div>Login to view Profile</div>
         } else {
             return (
                 <div className='main-container'>
+                    <div className='profile-info'>
                     <div>Profile:</div>
                     <div>First Name: {firstName}</div>
                     <div>Last Name: {lastName}</div>
                     <div>Email: {email}</div>
-                    <button onClick={() => this.toggleEdit()}>Edit</button>
+                    </div>
+                    <img src={edit} alt='edit-button' className='buttons' onClick={() => this.toggleEdit()}/>
                 </div>
             )
         }
