@@ -51,7 +51,7 @@ class Login extends React.Component {
                     <input type='password' name='password' onChange={(e) => this.changeHandler(e.target.name, e.target.value)} placeholder='password' required className='input'/>
                     <input type='text' name='firstName' onChange={(e) => this.changeHandler(e.target.name, e.target.value)} placeholder='First Name' required className='input'/>
                     <input type='text' name='lastName' onChange={(e) => this.changeHandler(e.target.name, e.target.value)} placeholder='Last Name' required className='input'/>
-                    <img src={register} onClick={() => this.register()}  className='buttons' id='register'/>
+                    <img src={register} alt='register-button' onClick={() => this.register()}  className='buttons' id='register'/>
                 </div>
             )
         }

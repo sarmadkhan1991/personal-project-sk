@@ -24,3 +24,9 @@ CREATE TABLE shows (
     venue VARCHAR(40) NOT NULL,
     price INTEGER NOT NULL
 );
+
+CREATE TABLE inventory (
+    id SERIAL PRIMARY KEY,
+    quantity INTEGER NOT NULL,
+    product_id INTEGER REFERENCES products (product_id)
+);

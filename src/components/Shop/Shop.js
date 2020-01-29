@@ -47,6 +47,7 @@ class Shop extends React.Component {
                     <img src={productCopy.img_url} alt={product.name} className='product-img'/>
                     <div>{productCopy.name}</div>
                     <div>${productCopy.price}</div>
+                    <div>In Stock: {productCopy.in_stock}</div>
                     <button onClick={() => this.addToCart(productCopy)}>add</button>
                 </div>
             )
