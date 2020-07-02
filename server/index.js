@@ -37,6 +37,9 @@ app.get('/api/user', ac.userData);
 
 app.get('/api/products', pc.getAll);
 
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../build/index.html'));
+});
 
 
 
